@@ -1,0 +1,4 @@
+//create a project
+npx create-react-app to train-schedule-application
+cd trains-schedule-application
+npm install @mui/material @mui/icons-material axios react-router-dom

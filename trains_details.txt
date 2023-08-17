@@ -1,0 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { List, ListItem, ListItemText } from '@mui/material';
+
+function trains_details() {
+  const [trains, setTrains] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/trains')  // Replace with your backend API endpoint
+      .then(response => {
+        setTrains(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching trains:', error);
+      });
+  }, []);
+
+  return (
+    <List>
+      {trains.map(train => (
+        <ListItem key={train.id} component={Link} to={`/train/${train.id}`}>
+          <ListItemText primary={train.name} secondary={`Departure: ${train.departureTime}`} />
+        </ListItem>
+      ))}
+    </List>
+  );
+}
+export default trains_details;
